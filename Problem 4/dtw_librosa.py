@@ -45,8 +45,10 @@ def dtw2(fast,normal,window):
         return dtw_matrix
 
 
-fast_audio = [1.3,2.4,3.6]
-normal_audio = [2.4,2.4,2.4,3.6,4.1]
+# fast_audio = [1.3,2.4,3.6]
+# normal_audio = [2.4,2.4,2.4,3.6,4.1]
+
+
 
 import librosa
 audio_data1 = 'jnt-memohonmaaf.wav'
@@ -64,22 +66,13 @@ print(y.shape, sampling_rate)
 fast_audio = y.tolist()
 normal_audio = x.tolist()
 
-# print(dtw1(fast_audio[30000:], normal_audio[30000:]))
-# print(dtw2(fast_audio, normal_audio,window=3))
-
 #using dtw library
 from fastdtw import fastdtw
 from scipy.spatial.distance import euclidean
 
-# x = np.array([1, 2, 3, 3, 7])
-# y = np.array([1, 2, 2, 2, 2, 2, 2, 4])
-
 # distance, path = fastdtw(x, y, dist=euclidean)
 distance, path = fastdtw(fast_audio, normal_audio, dist=euclidean)
 
-print(distance)
+print("The distance between them is: "+ str(distance) +"\n")
+print("The matched path are:")
 print(path)
-# print(type(x))
-
-# arr = [1,2,3,4,5,6,7,8,9]
-# print(arr[-5:])
