@@ -16,9 +16,11 @@ jnt2_soundwave = jnt2.readframes(-1)
 jnt2_slow = wave.open("jnt-perak-slowed.wav", "r")
 jnt2_soundwave_slow = jnt2_slow.readframes(-1)
 
-# # this is to show just how big the array is 
-# jnt_signal = np.frombuffer(jnt_soundwave, dtype='int16')
-# # print(jnt_signal[:10])
+# this is to show just how big the array is 
+jnt_signal_maaf = np.frombuffer(jnt_soundwave, dtype='int16')
+# print(jnt_signal[:10])
+jnt_signal_maaf_slow = np.frombuffer(jnt_soundwave_slow, dtype='int16')
+
 
 # jnt_framerate = jnt.getframerate() #frame rate
 # print(jnt_framerate)
@@ -47,3 +49,13 @@ print(dtw(jnt2_soundwave[:10], jnt2_soundwave_slow[:10]))
 
 print("\n\nmemohon maaf vs jnt perak:")
 print(dtw(jnt_soundwave[:10], jnt2_soundwave[:10]))
+
+from fastdtw import fastdtw
+from scipy.spatial.distance import euclidean
+
+# distance1, path1 = fastdtw(jnt2_soundwave, jnt2_soundwave_slow, dist=euclidean)
+distance1, path1 = fastdtw(jnt_signal_maaf, jnt_signal_maaf_slow, dist=euclidean)
+print(distance1)
+print(path1)
+
+# print(jnt2_soundwave[:10])
